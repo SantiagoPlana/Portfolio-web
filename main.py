@@ -4,26 +4,21 @@ import streamlit as st
 df = pd.read_csv('data.csv', sep=';')
 st.text('Santiago Plana')
 st.title('Portfolio Python')
-col1, col2, col3 = st.columns([2, 2, 2])
+col1, col2 = st.columns([3, 3])
 
+dfCols = df.columns
 with col2:
     with st.container():
-        st.subheader('Nombre del proyecto')
-        st.image('imgs/1.png')
-        st.text('Explicación breve del proyecto')
-        st.subheader('Nombre del proyecto')
-        st.image('imgs/1.png')
-        st.text('Explicación breve del proyecto')
+        for n in range(len(df)):
+            st.subheader(f'{df.loc[n, "title"]}')
+            image = 'imgs/'+df.loc[n, "image"]
+            st.image(f'{image}')
+            st.write(f'{df.loc[n, "description"]}')
+            url = df.loc[n, "url"]
+            st.write('[Código](url)')
 
-with col3:
-    with st.container():
-        st.subheader('Nombre del proyecto')
-        st.image('imgs/1.png')
-        st.text('Explicación breve del proyecto')
 with col1:
     with st.container():
         st.subheader('Acerca de mí')
-        st.text('''bla bla bla bla bla bla 
-bla bla bla 
-bla bla bla''')
+        st.write('bla bla bla bla bla bla bla bla bla bla bla asjhdahsdashdashdashdasdasdasdasdasd')
 
