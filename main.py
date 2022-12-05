@@ -5,10 +5,13 @@ df = pd.read_csv('data.csv')
 st.set_page_config(layout='wide')
 st.text('Santiago Plana')
 st.title('Portfolio Python')
-col1, col2 = st.columns([4, 4])
+col1, col2 = st.columns(2)
 
 dfCols = df.columns
 with col1:
+    st.image('imgs/foto.jpeg', use_column_width='always', )
+
+with col2:
     # with st.container():
     st.subheader('Acerca de mí')
     st.info('A lo largo de mi vida he cursado estudios y pasado por trabajos diversos. Ninguno terminó emocionándome'
@@ -28,12 +31,26 @@ with col1:
              'habiéndome desempeñado intermitentemente como traductor y profesor particular. Por otro lado, '
              'destaco mi habilidad de aprendizaje, mi capacidad para el razonamiento y la lógica, '
              'y mi entusiasmo por la resolución de problemas.')
-with col2:
+
+
+col3, empty_col, col4 = st.columns([1.5, 0.5, 1.5])
+with col3:
     with st.container():
-        for n in range(len(df)):
-            st.subheader(f'{df.loc[n, "title"]}')
-            image = 'imgs/'+df.loc[n, "image"]
+        for index, row in df[:4].iterrows():
+            st.header(row['title'])
+            image = 'imgs/'+row['image']
             st.image(f'{image}')
-            st.write(f'{df.loc[n, "description"]}')
-            url = df.loc[n, "url"]
-            st.write('[Código](url)')
+            st.write(row['description'])
+            url = row['url']
+            st.write(f'[Código]({url})')
+
+
+with col4:
+    with st.container():
+        for index, row in df[4:].iterrows():
+            st.header(row['title'])
+            image = 'imgs/' + row['image']
+            st.image(f'{image}')
+            st.write(row['description'])
+            url = row['url']
+            st.write(f'[Código]({url})')
